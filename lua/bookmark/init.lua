@@ -14,18 +14,16 @@ function Module.addBookmark()
 	io.close()
 end
 
-
 function Module.deleteBookmark(targetIndex)
 	local bookmarks = Module.readBookmarks(false)
 	local file = io.open(BookmarksFile, "w")
 	io.output(file)
-
-	for i = 1, table.getn(bookmarks) do
+	
+    for i = 1, table.getn(bookmarks) do
 		if i ~= targetIndex + 1 then
-			io.write(bookmarks[i], "\n")
-		end
-	end
-
+            io.write(bookmarks[i], "\n")
+		end 
+    end
 	io.close()
 end
 
