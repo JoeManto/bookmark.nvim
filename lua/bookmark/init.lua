@@ -2,7 +2,7 @@ local popup = require("plenary.popup")
 
 local Module = {}
 
-BookmarksFile = "bookmarks"
+BookmarksFile = "/tmp/bookmarks"
 local popoverWindowId
 
 function Module.addBookmark()
@@ -67,15 +67,17 @@ function ShowBookmarks(opts)
 			local char = selection:sub(i,i)
 			if char == ':' then
 				prefixEnd = i
+				break
 			end
 		end
-		
+
 		-- Exclude the ":" and space after
 		prefixEnd = prefixEnd + 2
 
 		local output = string.sub(selection, prefixEnd, string.len(selection))
 		-- Copy the selection path to the clip board
 		os.execute("echo \""..output.."\" | pbcopy")
+		-- vim.api.nvim_set_current_dir(output)
 	end
 
 	popoverWindowId = popup.create(opts, {
